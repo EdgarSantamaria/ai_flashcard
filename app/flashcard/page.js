@@ -1,16 +1,17 @@
 'use client'
-import { useUser } from "@clerk/nextjs"
+import {SignedIn, SignedOut, UserButton, useUser} from "@clerk/nextjs";
 import { useEffect, useState } from "react"
 import { collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore"
 import { db } from "@/firebase"
 import { useRouter } from "next/navigation"
 import { useSearchParams } from "next/navigation"
-import { Box, Button, Card, CardActionArea, CardContent, Container, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, Paper, TextField, Typography } from "@mui/material"
+import { Box, Button, Card, CardActionArea, CardContent, Container, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, Paper, TextField, Typography, AppBar, Toolbar } from "@mui/material"
 
 export default function Flashcard() {
     const {isLoaded, isSignedIn, user} = useUser()
     const [flashcards, setFlashcards] = useState([])
     const [flipped, setFlipped] = useState([])
+    const router = useRouter()
 
     const searchParams = useSearchParams()
     const search = searchParams.get('id')
@@ -43,11 +44,45 @@ export default function Flashcard() {
         }))
     }
 
+    const handleHomeClick = () => {
+        router.push('/')
+    }
+
+    const handleGoBack = () => {
+        router.push('/flashcards')
+    }
+
     return(
-        <Container maxWidth='100vw'>
-            {flashcards.length > 0 && (<Box sx={{mt:4}}>
-                <Typography variant='h5'>Flashcards Preview</Typography>
-                <Grid container spacing={3}>
+        <Container disableGutters maxWidth={false} sx={{backgroundColor: '#F6F7FB', minHeight:'100vh'}}>
+            <AppBar position='static' elevation={0} sx={{border:1, borderColor:'#ECEFF4',backgroundColor: '#FFFFFF'}}>
+                <Toolbar>
+                <Button variant='h7' sx={{color: '#2E3856'}} onClick={handleHomeClick}>
+                        AI Flashcards
+                    </Button>
+                    <Typography style={{flexGrow:1}}></Typography>
+                    <SignedIn>
+                        <UserButton/>
+                    </SignedIn>
+                </Toolbar>
+            </AppBar>
+            {flashcards.length > 0 && (
+            <Box sx={{mt:4}}>
+                <Box sx={{mt:4, mb:1, display:'flex', flexDirection: 'column', alignItems:'center'}}>
+                <Typography sx = {{color: '#2E3856'}} variant='h5'>Flashcards Preview</Typography>
+                <Button 
+                        variant='contained' 
+                        sx={{mt:1, 
+                            backgroundColor:'#413ED8', 
+                            "&:hover":{
+                            backgroundColor: '#3d3ac9'
+                            }}}
+                        onClick={handleGoBack}
+                    >
+                        {''}
+                        Go Back To Flashcards
+                    </Button>
+                </Box>
+                <Grid container spacing={3} sx={{mt:2}}>
                     {flashcards.map((flashcard, index) => (
                     <Grid item xs={12} sm={6} md={4} key={index}>
                         <Card>
@@ -83,12 +118,12 @@ export default function Flashcard() {
                                     >
                                         <div>
                                             <div>
-                                                <Typography variant="h5" component='div'>
+                                                <Typography sx = {{color: '#2E3856'}} variant="h5" component='div'>
                                                     {flashcard.front}
                                                 </Typography>
                                             </div>
                                             <div>
-                                                <Typography variant="h5" component='div'>
+                                                <Typography sx = {{color: '#2E3856'}} variant="h5" component='div'>
                                                     {flashcard.back}
                                                 </Typography>
                                             </div>

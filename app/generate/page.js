@@ -81,11 +81,15 @@ export default function Generate(){
         router.push('/')
     }
 
+    const handleFlashcardsClick = () => {
+        router.push('/flashcards')
+    }  
+
     return(
-        <Container maxWidth='100vw'>
-            <AppBar position='static'>
+        <Container disableGutters maxWidth={false} sx={{backgroundColor: '#F6F7FB', minHeight:'100vh'}}>
+            <AppBar position='static' elevation={0} sx={{border:1, borderColor:'#ECEFF4',backgroundColor: '#FFFFFF'}}>
                 <Toolbar>
-                    <Button variant='h7' sx={{display:'block'}} onClick={handleHomeClick}>
+                    <Button variant='h7' sx = {{color: '#2E3856'}} onClick={handleHomeClick}>
                         AI Flashcards
                     </Button>
                     <Typography style={{flexGrow:1}}></Typography>
@@ -94,9 +98,23 @@ export default function Generate(){
                     </SignedIn>
                 </Toolbar>
             </AppBar>
+            
+            <Box sx={{textAlign:'center', mt:5}}>
+                <Button 
+                    variant='contained' 
+                    sx={{mt:1, 
+                        backgroundColor:'#413ED8', 
+                        "&:hover":{
+                        backgroundColor: '#3d3ac9'
+                        }}}  
+                    onClick={handleFlashcardsClick}
+                >
+                    See your stored flashcards
+                </Button>
+            </Box>
             <Box sx={{mt:4, mb:6, display:'flex', flexDirection:'column', alignItems:'center'}}>
-                <Typography variant='h4'>Generate Flashcards</Typography>
-                <Paper sx={{p:4, width:'100%'}}>
+                <Typography sx = {{color: '#2E3856'}} variant='h4'>Generate Flashcards</Typography>
+                <Paper sx={{mt:3,p:4, width:'60%'}}>
                     <TextField 
                     value={text} 
                     onChange={(e) => setText(e.target.value)} 
@@ -108,8 +126,12 @@ export default function Generate(){
                     sx={{mb:2}}
                     />
                     <Button 
-                    variant="contained" 
-                    color='primary' 
+                    variant='contained' 
+                    sx={{mt:1, 
+                        backgroundColor:'#413ED8', 
+                        "&:hover":{
+                        backgroundColor: '#3d3ac9'
+                        }}} 
                     onClick={handleSubmit} 
                     fullWidth>
                         {''}
@@ -118,7 +140,21 @@ export default function Generate(){
                 </Paper>
             </Box>
             {flashcards.length > 0 && (<Box sx={{mt:4}}>
-                <Typography variant='h5'>Flashcards Preview</Typography>
+                <Box sx={{mt:4, mb:1, display:'flex', flexDirection: 'column', alignItems:'center'}}>
+                    <Typography sx = {{color: '#2E3856'}} variant='h5'>Flashcards Preview</Typography>
+                    <Button 
+                        variant='contained' 
+                        sx={{mt:1, 
+                            backgroundColor:'#413ED8', 
+                            "&:hover":{
+                            backgroundColor: '#3d3ac9'
+                            }}}
+                        onClick={handleOpen}
+                    >
+                        {''}
+                        Save
+                    </Button>
+                </Box>
                 <Grid container spacing={3}>
                     {flashcards.map((flashcard, index) => (
                     <Grid item xs={12} sm={6} md={4} key={index}>
@@ -155,12 +191,12 @@ export default function Generate(){
                                     >
                                         <div>
                                             <div>
-                                                <Typography variant="h5" component='div'>
+                                                <Typography sx = {{color: '#2E3856'}} variant="h5" component='div'>
                                                     {flashcard.front}
                                                 </Typography>
                                             </div>
                                             <div>
-                                                <Typography variant="h5" component='div'>
+                                                <Typography sx = {{color: '#2E3856'}} variant="h5" component='div'>
                                                     {flashcard.back}
                                                 </Typography>
                                             </div>
@@ -171,18 +207,12 @@ export default function Generate(){
                         </Card>
                     </Grid>
                 ))}</Grid>
-                <Box  sx={{mt:4, display:'flex', justifyContent:'center'}}>
-                    <Button variant='contained' color='secondary' onClick={handleOpen}>
-                        {''}
-                        Save
-                    </Button>
-                </Box>
             </Box>
             )}
             <Dialog open={open}>
-                <DialogTitle>Save Flashcards</DialogTitle>
+                <DialogTitle sx = {{color: '#2E3856'}}>Save Flashcards</DialogTitle>
                 <DialogContent>
-                    <DialogContentText>Enter a name for your Flashcards</DialogContentText>
+                    <DialogContentText sx = {{color: '#2E3856'}}>Enter a name for your Flashcards</DialogContentText>
                     <TextField 
                     autoFocus 
                     margin='dense' 
@@ -191,11 +221,12 @@ export default function Generate(){
                     value={name} 
                     onChange={(e) => setName(e.target.value)}
                     variant='outlined'
+                    sx = {{color: '#2E3856'}}
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
-                    <Button onClick={saveFlashcards}>Save</Button>
+                    <Button sx = {{color: '#2E3856'}} onClick={handleClose}>Cancel</Button>
+                    <Button sx = {{color: '#2E3856'}} onClick={saveFlashcards}>Save</Button>
                 </DialogActions>
             </Dialog>
         </Container>

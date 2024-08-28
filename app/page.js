@@ -41,17 +41,18 @@ export default function Home() {
   }
   
   return (
-    <Container maxWidth='100vw'>
+    <Container disableGutters maxWidth={false} sx={{backgroundColor: '#F6F7FB', minHeight:'100vh'}}>
       <Head>
         <title>Flashcard SaaS</title>
         <meta name='description' content='Create Flashcards from your text.' />
       </Head>
-      <AppBar position='static'>
+      <AppBar position='static' elevation={0} sx={{border:1, borderColor:'#ECEFF4',backgroundColor: '#FFFFFF'}}>
         <Toolbar>
-          <Typography variant='h7' style={{flexGrow:1}}>AI Flashcards</Typography>
+          <Typography sx = {{color: '#2E3856'}} variant='h7'>AI Flashcards</Typography>
+          <Typography style={{flexGrow:1}}></Typography>
           <SignedOut>
-            <Button color='inherit' href="/sign-in">Login</Button>
-            <Button color='inherit' href="/sign-up">Sign Up</Button>
+            <Button sx={{color:'#2E3856'}} href="/sign-in">Login</Button>
+            <Button sx={{color:'#2E3856'}} href="/sign-up">Sign Up</Button>
           </SignedOut>
           <SignedIn>
             <UserButton/>
@@ -60,30 +61,31 @@ export default function Home() {
       </AppBar>
 
       <Box sx={{textAlign:'center', my:4}}>
-        <Typography variant='h3' gutterBottom>Welcome to AI Flashcards</Typography>
-        <Typography variant='h6' gutterBottom>Create flashcards from your text.</Typography>
-        <Button variant='contained' color='primary' sx={{mt:2}} onClick={handleGetStarted}>Get Started</Button>
+        <Typography sx = {{color: '#2E3856'}} variant='h3' gutterBottom>Welcome to AI Flashcards</Typography>
+        <Typography sx = {{color: '#2E3856'}} variant='h6' gutterBottom>Create flashcards from your text.</Typography>
+        <Button variant='contained' sx={{mt:2, backgroundColor:'#413ED8', "&:hover":{
+          backgroundColor: '#3d3ac9'
+        }}} onClick={handleGetStarted}>Get Started</Button>
       </Box>
-      <Box sx={{my:6}}>
-        <Typography variant="h4" gutterBottom>Features</Typography>
+      <Box sx={{my:6, mx:6}}>
         <Grid container spacing={4}>
           <Grid item xs ={12} md={4}>
-            <Typography variant="h5" gutterBottom>Text Input</Typography>
-            <Typography>
+            <Typography sx = {{color: '#2E3856'}} variant="h5" gutterBottom>Text Input</Typography>
+            <Typography sx = {{color: '#2E3856'}}>
               {''}
               Input your text and let the AI do the rest.
               </Typography>
           </Grid>
           <Grid item xs ={12} md={4}>
-            <Typography variant="h5" gutterBottom>AI Flashcards</Typography>
-            <Typography>
+            <Typography sx = {{color: '#2E3856'}} variant="h5" gutterBottom>AI Flashcards</Typography>
+            <Typography sx = {{color: '#2E3856'}}>
               {''}
               Let our AI generate flashcards for you.
               </Typography>
           </Grid>
           <Grid item xs ={12} md={4}>
-            <Typography variant="h5" gutterBottom>Accessible Anywhere</Typography>
-            <Typography>
+            <Typography sx = {{color: '#2E3856'}} variant="h5" gutterBottom>Accessible Anywhere</Typography>
+            <Typography sx = {{color: '#2E3856'}}>
               {''}
               Access your flashcards from any device. Study on the go with ease.
               </Typography>
@@ -91,31 +93,35 @@ export default function Home() {
         </Grid>
       </Box>
 
-      <Box sx={{my:6, textAlign:'center'}}>
-        <Typography variant='h5' gutterBottom>Pricing</Typography>
-        <Typography variant='h6' gutterBottom>Free for 30 days. No credit card required.</Typography>
+      <Box sx={{textAlign:'center'}}>
+        <Typography sx = {{color: '#2E3856'}} variant='h5'>Pricing</Typography>
+        <Typography sx = {{color: '#2E3856'}} variant='h6' gutterBottom>Choose a plan that works for you.</Typography>
 
-        <Grid container spacing={4}>
+        <Grid container spacing={4} sx={{mt:1}}>
           <Grid item xs ={12} md={6}>
-            <Box sx={{p:3, border:'1px solid', borderColor: 'grey.300', borderRadius:2}}>
-              <Typography variant="h5" gutterBottom>Basic</Typography>
-              <Typography variant="h6" gutterBottom>Free</Typography>
-              <Typography>
+            <Box sx={{mx:6, p:3, border:'1px solid', borderRadius:2, borderColor:'#ECEFF4',backgroundColor: '#FFFFFF'}}>
+              <Typography sx = {{color: '#2E3856'}} variant="h5" >Basic</Typography>
+              <Typography sx = {{color: '#2E3856'}} variant="h6" >Free</Typography>
+              <Typography sx = {{color: '#2E3856'}}>
                 {''}
                 Limited flashcards and storage.
               </Typography>
-              <Button variant='contained' color='primary' sx={{mt:2}} href="/sign-up">Select Basic Plan</Button>
+              <Button variant='contained' color='primary' sx={{mt:2, backgroundColor:'#413ED8', "&:hover":{
+          backgroundColor: '#3d3ac9'
+        }}} href="/sign-up">Select Basic Plan</Button>
             </Box>
           </Grid>
           <Grid item xs ={12} md={6}>
-            <Box sx={{p:3, border:'1px solid', borderColor: 'grey.300', borderRadius:2}}>
-              <Typography variant="h5" gutterBottom>Pro</Typography>
-              <Typography variant="h6" gutterBottom>$2.99/month</Typography>
-              <Typography>
+            <Box sx={{mx:6, p:3, border:'1px solid', borderRadius:2, borderColor:'#ECEFF4',backgroundColor: '#FFFFFF'}}>
+              <Typography sx = {{color: '#2E3856'}} variant="h5" >Pro</Typography>
+              <Typography sx = {{color: '#2E3856'}} variant="h6" >$2.99/month</Typography>
+              <Typography sx = {{color: '#2E3856'}}>
                 {''}
                 Unlimited flashcards and storage.
               </Typography>
-              <Button variant='contained' color='primary' sx={{mt:2}} onClick={handleSubmit}>Select Pro Plan</Button>
+              <Button variant='contained' color='primary' sx={{mt:2, backgroundColor:'#413ED8', "&:hover":{
+          backgroundColor: '#3d3ac9'
+        }}} onClick={handleSubmit}>Select Pro Plan</Button>
             </Box>
           </Grid>
         </Grid>
